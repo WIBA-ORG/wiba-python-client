@@ -13,6 +13,20 @@ import threading
 
 T = TypeVar('T')
 
+# Constants used by helper functions
+STANCE_MAP = {
+    'Argument in Favor': 'Favor',
+    'Argument Against': 'Against',
+    'No Argument': 'NoArgument'
+}
+
+TOPIC_VALUES = {
+    'No Topic': 'NoTopic',
+    'no topic': 'NoTopic',
+    'no-topic': 'NoTopic',
+    'notopic': 'NoTopic'
+}
+
 @dataclass
 class ClientConfig:
     """Configuration for the WIBA client"""
@@ -148,7 +162,7 @@ class ResponseFactory:
         
         # API returns a list of dictionaries with extracted_topic
         topic = raw_response[0]['extracted_topic']
-        standardized_topic = WIBAClient.TOPIC_VALUES.get(topic, topic)
+        standardized_topic = TOPIC_VALUES.get(topic, topic)
         
         result = TopicExtractionResult(
             text=input_text,
@@ -166,7 +180,7 @@ class ResponseFactory:
         )
         
         # Use the class-level stance mapping
-        stance_text = WIBAClient.STANCE_MAP.get(raw_response[0]['stance_prediction'], raw_response[0]['stance_prediction'])
+        stance_text = STANCE_MAP.get(raw_response[0]['stance_prediction'], raw_response[0]['stance_prediction'])
         
         result = StanceAnalysisResult(
             text=input_text,
