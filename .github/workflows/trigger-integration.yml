@@ -1,0 +1,21 @@
+name: Trigger Integration Test
+
+on:
+  push:
+    branches: [ main ]
+  release:
+    types: [published]
+
+jobs:
+  trigger-integration:
+    runs-on: ubuntu-latest
+    if: github.repository == 'WIBA-ORG/wiba-python-client'
+    
+    steps:
+    - name: Trigger platform integration test
+      run: |
+        curl -X POST \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          https://api.github.com/repos/WIBA-ORG/wiba-platform/dispatches \
+          -d '{"event_type":"integration-test","client_data":{"source":"wiba-python-client","ref":"${{ github.ref }}"}}'

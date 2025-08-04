@@ -1,0 +1,27 @@
+# CODEOWNERS for WIBA Python Client
+# This file defines who is responsible for code review in the client library
+
+# Global ownership - all changes need approval from core team
+* @armaniii
+
+# Core client library
+/wiba/ @armaniii @sdk-team
+
+# Package configuration and distribution
+/setup.py @armaniii @sdk-team
+/pyproject.toml @armaniii @sdk-team
+/requirements.txt @armaniii @sdk-team
+
+# Examples and documentation
+/examples/ @armaniii @sdk-team @docs-team
+/README.md @armaniii @docs-team
+
+# Testing and benchmarks
+/tests/ @armaniii @sdk-team
+/benchmarks/ @armaniii @performance-team
+
+# CI/CD and GitHub workflows
+/.github/ @armaniii @devops-team
+
+# Documentation
+/docs/ @armaniii @docs-team
